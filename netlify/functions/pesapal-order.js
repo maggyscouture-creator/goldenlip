@@ -58,7 +58,11 @@ exports.handler = async function (event) {
       return {
         statusCode: 502,
         headers,
-        body: JSON.stringify({ error: 'Failed to authenticate with Pesapal', details: authData })
+        body: JSON.stringify({
+          error: 'Failed to authenticate with Pesapal',
+          pesapal_error: authData.error || authData,
+          status_code: authResp.status
+        })
       };
     }
 
